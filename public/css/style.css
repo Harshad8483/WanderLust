@@ -1,0 +1,138 @@
+body {
+   font-family: "Plus Jakarta Sans", sans-serif !important;
+}
+
+.navbar {
+    height: 5rem;
+    background-color: #f8f9fa;
+}
+
+.fa-compass {
+    font-size: 2rem;
+    color: #fe424d;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+/* Footer */
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links, .f-info-socials, .f-info-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info {
+    text-align: center;
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+/* Cards */
+
+.card {
+    border: none !important;
+    margin-bottom: 2rem;
+    height: 100%;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    height: 20rem;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text p {
+    font-weight: 400 !important;
+}
+.listing-link {
+    text-decoration: none;
+    
+}
+
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card:hover .card-img-overlay {
+    opacity: 0.2;
+    background-color:white;
+}
+
+/* New Listing Form */
+
+.container h2 {
+    color: #222;
+}
+
+.form-control {
+    border-radius: 0.6rem;
+    padding: 0.7rem;
+}
+
+.form-control:focus {
+    border-color: #fe424d;
+    box-shadow: 0 0 0 0.15rem rgba(254, 66, 77, 0.25);
+}
+
+.btn-add {
+    background-color: #fe424d !important;
+    color: white !important;
+    border: none !important;
+    padding: 0.55rem 1.4rem !important;
+    border-radius: 0.5rem;
+}
+
+.btn-add:hover {
+    background-color: #e63946 !important;
+}
+
+/* Show Page */
+
+.show-card {
+    border: none !important;
+}
+
+.show-img {
+    height: 22rem;
+    object-fit: cover;
+    border-radius: 1rem !important;
+}
+
+.show-card .card-body {
+    padding: 1rem 0 !important;
+}
+
+.show-card .card-title {
+    font-size: 1.3rem;
+}
+
+.show-card .card-text {
+    margin-bottom: 0.35rem;
+}
