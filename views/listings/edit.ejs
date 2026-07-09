@@ -6,7 +6,7 @@
 
             <h2 class="mb-4 fw-bold">Edit your Listing</h2>
 
-            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation">
 
                 <div class="mb-3">
                     <label class="form-label">Title</label>
@@ -16,6 +16,7 @@
                         class="form-control"
                         value="<%= listing.title %>"
                         required>
+                        <div class="valid-feedback">Looks good!</div>
                 </div>
 
                 <div class="mb-3">
@@ -25,6 +26,7 @@
                         class="form-control"
                         rows="3"
                         required><%= listing.description %></textarea>
+                        <div class="invalid-feedback">Please provide a valid description.</div>
                 </div>
 
                 <div class="mb-3">
@@ -35,6 +37,7 @@
                         class="form-control"
                         value="<%= listing.image.url %>"
                         required>
+                        <div class="invalid-feedback">Please provide a valid image link.</div>
                 </div>
 
                 <div class="row">
@@ -47,6 +50,7 @@
                             class="form-control"
                             value="<%= listing.price %>"
                             required>
+                        <div class="invalid-feedback">Please provide a valid price.</div>
                     </div>
 
                     <div class="col-md-6 mb-3">
@@ -57,6 +61,7 @@
                             class="form-control"
                             value="<%= listing.country %>"
                             required>
+                        <div class="invalid-feedback">Please provide a valid country.</div>
                     </div>
 
                 </div>
@@ -80,3 +85,4 @@
         </div>
     </div>
 </div>
+<script src="/js/script.js"></script>
