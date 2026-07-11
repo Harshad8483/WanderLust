@@ -7,7 +7,8 @@ const methodOverride = require('method-override');
 const ejsMate = require('ejs-mate');
 const wrapAsync = require('./utils/wrapAsync');
 const ExpressError = require('./utils/ExpressError'); 
-const { listingSchema } = require('./schema');
+const { listingSchema, reviewSchema } = require('./schema');
+const Review = require('./models/review');
 const mongoURI = 'mongodb://127.0.0.1:27017/wonderlust';
 
 
@@ -42,6 +43,17 @@ const validateListing = (req, res, next) => {
 }
 };
 
+
+const validateReview = (req, res, next) => {
+    let {error} = reviewSchema.validate(req.body);
+        if (error) {
+            let errorMsg = error.details.map(el => el.message).join(",");
+            throw new ExpressError(400, errorMsg);
+        }else {
+        next();
+}
+};
+
 // index route 
 app.get("/listings", wrapAsync(async (req, res) => {
     const allListings = await Listing.find({});
@@ -57,7 +69,7 @@ app.get("/listings/new", (req, res) => {
 // Show route 
 app.get("/listings/:id", wrapAsync(async (req, res) => {
     let {id} = req.params;
-    const listing = await Listing.findById(id);
+    const listing = await Listing.findById(id).populate("reviews");
     res.render("listings/show", {listing});
 }));
 
@@ -94,6 +106,33 @@ app.delete("/listings/:id", wrapAsync(async (req, res) => {
     console.log("Deleted listing:", deletedListing);
     res.redirect("/listings");
 }));
+
+//Reviews
+//post route for reviews
+app.post("/listings/:id/reviews", validateReview, wrapAsync(async (req, res) => {
+    let listing = await Listing.findById(req.params.id);
+    let review = new Review(req.body.review);
+    listing.reviews.push(review);
+    await review.save();
+    await listing.save();
+    res.redirect(`/listings/${listing._id}`);
+}));
+
+// Delete Review Route
+app.delete("/listings/:id/reviews/:reviewId", wrapAsync(async (req, res) => {
+
+    let { id, reviewId } = req.params;
+
+    await Listing.findByIdAndUpdate(id, {
+        $pull: { reviews: reviewId }
+    });
+
+    await Review.findByIdAndDelete(reviewId);
+
+    res.redirect(`/listings/${id}`);
+
+}));
+
 
 
 

@@ -136,3 +136,40 @@ body {
 .show-card .card-text {
     margin-bottom: 0.35rem;
 }
+
+/* Review Cards */
+
+.review-card{
+    border:1px solid #ddd !important;
+    border-radius:8px !important;
+    transition:0.3s;
+}
+
+.review-card:hover{
+    box-shadow:0 .4rem 1rem rgba(0,0,0,.15);
+}
+
+.review-card .card-body{
+    padding:1rem !important;
+}
+
+.review-card .card-title{
+    font-size:1.1rem;
+    font-weight:700;
+    color:#222;
+}
+
+.review-card .card-text{
+    color:#555;
+    line-height:1.6;
+    font-size:0.95rem;
+}
+
+.review-rating{
+    font-weight:600;
+    color:#555;
+}
+
+.review-card .btn{
+    width:fit-content;
+}
