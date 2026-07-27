@@ -6,22 +6,15 @@ const ExpressError = require("../utils/ExpressError");
 const { reviewSchema } = require("../schema");
 const Review = require("../models/review");
 const Listing = require("../models/listing");
-
-const validateReview = (req, res, next) => {
-    let {error} = reviewSchema.validate(req.body);
-        if (error) {
-            let errorMsg = error.details.map(el => el.message).join(",");
-            throw new ExpressError(400, errorMsg);
-        }else {
-        next();
-}
-};
+const { validateReview, isLoggedIn, isReviewAuthor} = require("../middleware.js");
 
 //Reviews
 //post route for reviews
-router.post("/", validateReview, wrapAsync(async (req, res) => {
+router.post("/", isLoggedIn,validateReview, wrapAsync(async (req, res) => {
     let listing = await Listing.findById(req.params.id);
     let review = new Review(req.body.review);
+    review.author = req.user._id;
+    console.log(review);
     listing.reviews.push(review);
     await review.save();
     await listing.save();
@@ -30,7 +23,7 @@ router.post("/", validateReview, wrapAsync(async (req, res) => {
 }));
 
 // Delete Review Route
-router.delete("/:reviewId", wrapAsync(async (req, res) => {
+router.delete("/:reviewId", isLoggedIn, isReviewAuthor, wrapAsync(async (req, res) => {
 
     let { id, reviewId } = req.params;
 

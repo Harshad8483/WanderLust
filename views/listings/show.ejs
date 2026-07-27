@@ -19,6 +19,8 @@
 
                 <div class="card-body">
 
+                    <p class="card-text">Owned by <i><%= listing.owner.username %></i></p>
+
                     <p class="card-text">
                         <%= listing.description %>
                     </p>
@@ -34,7 +36,8 @@
                     <p>
                         <%= listing.country %>
                     </p>
-
+                     
+                    <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
                     <div class="d-flex gap-3 mt-4">
 
                         <a
@@ -54,15 +57,17 @@
                         </form>
 
                     </div>
-
+                    <% } %>
+                    
                 </div>
 
             </div>
+            
 
             <!-- Review Form -->
-
+           
             <div class="mt-5">
-
+                <% if(currUser) {%>
                 <h4>Leave a Review</h4>
 
                 <form
@@ -121,6 +126,7 @@
                 </form>
 
             </div>
+            <% } %>
 
             <!-- Reviews -->
 
@@ -142,9 +148,7 @@
 
                             <div class="card-body">
 
-                                <h5 class="card-title fw-bold">
-                                    Guest
-                                </h5>
+                                <h5 class="card-title fw-bold">@<%= review.author.username %></h5>
 
                                 <p class="card-text">
                                     <%= review.comment %>
