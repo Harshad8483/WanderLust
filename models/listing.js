@@ -10,14 +10,8 @@ const listingSchema = new schema({
     },
     description: String,
    image: {
-    filename: {
-        type: String,
-        default: "listingimage",
-    },
-    url: {
-        type: String,
-        default: "https://media.istockphoto.com/id/2233143644/photo/scenic-tropical-beach-paradise-with-palm-trees-in-goa-india.jpg?s=1024x1024&w=is&k=20&c=PYknAX7KgxAkGbF-3vK7EqnBsmVhECsD57ElX0FsXEc=",
-    }
+     url: String,
+     filename: String
 },
     price: Number,
     location: String,
